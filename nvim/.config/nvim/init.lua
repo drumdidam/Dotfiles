@@ -939,10 +939,27 @@ require('lazy').setup({
     'stefanvanburen/rams.vim',
     lazy = false,
     priority = 1000,
+    config = function() end,
+  },
+
+  {
+    dir = vim.fn.stdpath 'config' .. '/lua/colors/print_wb',
+    name = 'print_wb',
+    lazy = false,
     config = function()
-      vim.cmd.colorscheme 'rams'
+      vim.cmd 'syntax off'
     end,
   },
+  {
+    dir = vim.fn.stdpath 'config' .. '/lua/colors/preto',
+    name = 'preto',
+    lazy = false,
+    config = function()
+      vim.cmd 'colorscheme preto'
+      vim.cmd 'syntax off'
+    end,
+  },
+
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
