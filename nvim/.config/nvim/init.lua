@@ -124,7 +124,7 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.undofile = true
 
-vim.o.shell = 'powershell'
+-- vim.o.shell = 'kitty'
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -696,8 +696,13 @@ require('lazy').setup({
         clangd = {},
         cmake = {},
         -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
+        pyright = {},
+        rust_analyzer = {},
+        html = {},
+        cssls = {},
+        ts_ls = {},
+        tailwindcss = {},
+        emmet_ls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -917,12 +922,13 @@ require('lazy').setup({
       }
     end,
   },
-
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+    --
+    --
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
@@ -939,7 +945,9 @@ require('lazy').setup({
     'stefanvanburen/rams.vim',
     lazy = false,
     priority = 1000,
-    config = function() end,
+    config = function()
+      vim.cmd 'colorscheme rams'
+    end,
   },
 
   {
@@ -955,7 +963,6 @@ require('lazy').setup({
     name = 'preto',
     lazy = false,
     config = function()
-      vim.cmd 'colorscheme preto'
       vim.cmd 'syntax off'
     end,
   },
@@ -1006,7 +1013,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'cpp', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -1014,7 +1021,7 @@ require('lazy').setup({
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
+        additional_vim_regex_highlighting = false,
       },
       indent = { enable = true, disable = { 'ruby' } },
     },
