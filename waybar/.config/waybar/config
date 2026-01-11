@@ -6,7 +6,8 @@
   "modules-left": [
   "niri/workspaces",
   "custom/uptime",
-  "cpu"
+  "cpu",
+  "cffi/niri-taskbar"
   ],
 
   "modules-center": ["clock"],
@@ -25,6 +26,19 @@
       "active": "",
       "default": ""
     }
+  },
+
+  "cffi/niri-taskbar": {
+    // module_path
+    "module_path": "/usr/lib/waybar/libniri_taskbar.so",
+    "apps": {
+      "signal": [
+        {
+          "match": "\\([0-9]+\\)$",
+          "class": "unread",
+        },
+      ],
+    },
   },
 
   "bluetooth": {
@@ -52,7 +66,7 @@
   },
 
   "clock": {
-    "timezone": "Asia/Kolkata",
+    "timezone": "Europe/Vienna",
     "tooltip": false,
     "format": "{:%H:%M:%S  -  %A, %d}",
     "interval": 1

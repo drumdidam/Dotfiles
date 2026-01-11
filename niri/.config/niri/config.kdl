@@ -238,6 +238,7 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
+spawn-at-startup "Xwayland"
 spawn-sh-at-startup "swww img ~/Downloads/forest_1.jpg"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
