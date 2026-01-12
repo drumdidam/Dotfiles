@@ -3,10 +3,12 @@
   "position": "top",
   "margin-bottom": -10,
   "spacing" : 0,
+
   "modules-left": [
   "niri/workspaces",
   "custom/uptime",
   "cpu",
+  "memory",
   "cffi/niri-taskbar"
   ],
 
@@ -19,6 +21,12 @@
     "backlight",
     "battery",
   ],
+
+  "memory": {
+    "interval": 30,
+    "format": "{}% ",
+    "max-length": 10
+},
 
   "niri/workspaces": {
     "format": "{name}: {icon}",
