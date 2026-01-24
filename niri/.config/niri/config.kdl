@@ -241,8 +241,7 @@ spawn-at-startup "waybar"
 spawn-at-startup "Xwayland"
 spawn-at-startup "steam"
 spawn-at-startup "discord"
-spawn-sh-at-startup "swww-daemon"
-spawn-sh-at-startup "swww img ~/Downloads/forest_1.jpg"
+spawn-at-startup "swww-daemon"
 spawn-sh-at-startup "swayidle -w timeout 360 'swaylock -f'"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
