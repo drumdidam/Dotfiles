@@ -697,7 +697,6 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {},
-        cmake = {},
         -- gopls = {},
         pyright = {},
         rust_analyzer = {},
@@ -941,32 +940,7 @@ require('lazy').setup({
           comments = { italic = false }, -- Disable italics in comments
         },
       }
-    end,
-  },
-  {
-    -- Rams Theme
-    'stefanvanburen/rams.vim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd 'colorscheme vim'
-    end,
-  },
-
-  {
-    dir = vim.fn.stdpath 'config' .. '/lua/colors/print_wb',
-    name = 'print_wb',
-    lazy = false,
-    config = function()
-      vim.cmd 'syntax off'
-    end,
-  },
-  {
-    dir = vim.fn.stdpath 'config' .. '/lua/colors/preto',
-    name = 'preto',
-    lazy = false,
-    config = function()
-      vim.cmd 'syntax off'
+      vim.cmd.colorscheme 'tokyonight'
     end,
   },
 
@@ -1016,7 +990,22 @@ require('lazy').setup({
     main = 'nvim-treesitter.config', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'cpp', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'cpp',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'python',
+        'javascript',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

@@ -72,7 +72,7 @@ input {
 output "DP-3" {
     mode "2560x1440@164.987"
 }
-output "DP-2" {
+output "DP-1" {
     mode "2560x1440@164.987"
 }
 // Settings that influence how windows are positioned and sized.
@@ -241,8 +241,9 @@ spawn-at-startup "waybar"
 spawn-at-startup "Xwayland"
 spawn-at-startup "steam"
 spawn-at-startup "discord"
-spawn-at-startup "swww-daemon"
-spawn-sh-at-startup "swayidle -w timeout 360 'swaylock -f'"
+spawn-at-startup "awww-daemon"
+spawn-sh-at-startup "swayidle -w"
+
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -290,7 +291,7 @@ window-rule {
 
 window-rule {
     match app-id="^discord$"
-    open-on-output "DP-2"  // Dein rechter Monitor
+    open-on-output "DP-1"  // Dein rechter Monitor
     open-maximized true
 }
 
