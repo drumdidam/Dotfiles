@@ -1,0 +1,6 @@
+timeout 300 'swaylock -f -c 000000'
+timeout 500 'niri msg output DP-3 off' resume 'niri msg output DP-3 on'
+timeout 500 'niri msg output DP-2 off' resume 'niri msg output DP-2 on'
+# timeout 600 'systemctl suspend-then-hibernate'
+# after-resume 'niri msg output DP-2 on'
+# after-resume 'niri msg output DP-3 on'
