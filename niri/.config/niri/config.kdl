@@ -71,9 +71,11 @@ input {
 }
 output "DP-3" {
     mode "2560x1440@164.987"
+    position x=2560 y=0
 }
 output "DP-2" {
     mode "2560x1440@164.987"
+    position x=0 y=0
 }
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
@@ -136,7 +138,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
+        active-color "#7da47a"
 
         // Color of the ring on inactive monitors.
         //
@@ -236,7 +238,6 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
 spawn-at-startup "Xwayland"
 spawn-at-startup "steam"
@@ -291,7 +292,7 @@ window-rule {
 
 window-rule {
     match app-id="^discord$"
-    open-on-output "DP-1"  // Dein rechter Monitor
+    open-on-output "DP-2"  // Dein rechter Monitor
     open-maximized true
 }
 
@@ -323,8 +324,11 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Ctrl+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
-    Mod+Shift+B { spawn "sh" "-c" "killall -SIGUSR2 waybar || (pkill waybar; sleep 0.1; waybar &)"; }
-    Mod+E { spawn "dolphin";}
+    Mod+Shift+B { spawn "sh" "-c" "pkill yambar; yambar &"; }
+    //Mod+E { spawn "dolphin";}
+    Mod+E hotkey-overlay-title="Open Yazi" { spawn "kitty" "--working-directory" "-e" "yazi"; }
+    Mod+M { spawn-sh "brave-origin-nightly --new-window https://mistral.ai/chat";}
+    Mod+B { spawn-sh "brave-origin-nightly";}
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.

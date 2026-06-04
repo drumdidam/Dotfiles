@@ -1,0 +1,111 @@
+bar:
+  height: 24
+  location: top
+  background: 262624ff
+  foreground: e8e4dcff
+  font: Comic Code:size=11
+
+  left:
+    - script:
+        path: /home/drumdidam/.config/yambar/niri-workspaces.sh
+        args: []
+        poll-interval: 500
+        content:
+          string:
+            text: "{output}"
+            foreground: 7b9ebdff
+            left-margin: 8
+            right-margin: 8
+
+    - cpu:
+        poll-interval: 2000
+        content:
+          - string:
+              text: "CPU {mean:02}%"
+              foreground: 938e87ff
+              left-margin: 4
+              right-margin: 8
+
+    - mem:
+        poll-interval: 5000
+        content:
+          - string:
+              text: "MEM {used_mb}MB"
+              foreground: 938e87ff
+              left-margin: 4
+              right-margin: 8
+
+  right:
+    - network:
+        name: wlan0
+        poll-interval: 5000
+        content:
+          map:
+            tag: state
+            values:
+              up:
+                string:
+                  text: "{ssid}"
+                  foreground: 7da47aff
+                  left-margin: 8
+                  right-margin: 4
+              down:
+                string:
+                  text: "offline"
+                  foreground: c67777ff
+                  left-margin: 8
+                  right-margin: 4
+
+    - pulse:
+        content:
+          map:
+            tag: muted
+            values:
+              false:
+                string:
+                  text: "{volume}%"
+                  foreground: a68bbfff
+                  left-margin: 8
+                  right-margin: 4
+              true:
+                string:
+                  text: "mute"
+                  foreground: 938e87ff
+                  left-margin: 8
+                  right-margin: 4
+
+    - battery:
+        name: BAT0
+        poll-interval: 30000
+        content:
+          map:
+            tag: state
+            values:
+              charging:
+                string:
+                  text: "▲ {capacity}%"
+                  foreground: 7da47aff
+                  left-margin: 8
+                  right-margin: 4
+              discharging:
+                string:
+                  text: "▼ {capacity}%"
+                  foreground: c4956aff
+                  left-margin: 8
+                  right-margin: 4
+              full:
+                string:
+                  text: "✓ {capacity}%"
+                  foreground: 7da47aff
+                  left-margin: 8
+                  right-margin: 4
+
+    - clock:
+        time-format: "%H:%M"
+        date-format: "%d.%m.%Y"
+        content:
+          - string:
+              text: "{date}  {time}"
+              foreground: e8e4dcff
+              left-margin: 8
+              right-margin: 8

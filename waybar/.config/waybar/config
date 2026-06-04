@@ -1,11 +1,10 @@
 {
   "layer": "top",
   "position": "top",
-  "margin-bottom": -10,
-  "spacing" : 0,
+  "height": 34,
+  "spacing": 0,
 
   "modules-left": [
-  "niri/workspaces",
   "custom/uptime",
   "cpu",
   "memory",
@@ -38,7 +37,7 @@
 
   "cffi/niri-taskbar": {
     // module_path
-    "module_path": "/usr/lib/waybar/libniri_taskbar.so",
+    "module_path": "/home/drumdidam/repos/nir-taskbar-fix-dir/niri-taskbar-ipcfix/target/release/libniri_taskbar.so",
     "apps": {
       "signal": [
         {

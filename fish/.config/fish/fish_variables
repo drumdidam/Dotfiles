@@ -1,4 +1,32 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR __fish_initialized:4300
+SETUVAR fish_color_autosuggestion:585855
+SETUVAR fish_color_cancel:c67777
+SETUVAR fish_color_command:7b9ebd
+SETUVAR fish_color_comment:938e87
+SETUVAR fish_color_cwd:7b9ebd
+SETUVAR fish_color_end:938e87
+SETUVAR fish_color_error:c67777
+SETUVAR fish_color_escape:a68bbf
+SETUVAR fish_color_host:7b9ebd
+SETUVAR fish_color_host_remote:c4956a
+SETUVAR fish_color_keyword:c4956a
+SETUVAR fish_color_normal:e8e4dc
+SETUVAR fish_color_operator:d97757
+SETUVAR fish_color_param:d4cfc6
+SETUVAR fish_color_quote:7da47a
+SETUVAR fish_color_redirection:a68bbf
+SETUVAR fish_color_search_match:--background\x3d4a4030
+SETUVAR fish_color_selection:--reverse
+SETUVAR fish_color_user:7da47a
+SETUVAR fish_color_valid_path:--underline
+SETUVAR fish_pager_color_completion:e8e4dc
+SETUVAR fish_pager_color_description:938e87
+SETUVAR fish_pager_color_prefix:d97757\x20--bold
+SETUVAR fish_pager_color_progress:d97757
+SETUVAR fish_pager_color_selected_background:--background\x3d3a3a37
+SETUVAR fish_pager_color_selected_completion:e8e4dc
+SETUVAR fish_pager_color_selected_description:938e87
+SETUVAR fish_pager_color_selected_prefix:d97757\x20--bold
 SETUVAR fish_user_paths:/home/drumdidam/\x2elocal/bin

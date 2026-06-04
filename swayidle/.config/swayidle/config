@@ -1,0 +1,4 @@
+# ~/.config/swayidle/config
+timeout 300 'hyprlock'
+timeout 500 'niri msg output DP-3 off' resume 'niri msg output DP-3 on'
+timeout 500 'niri msg output DP-2 off' resume 'niri msg output DP-2 on'
