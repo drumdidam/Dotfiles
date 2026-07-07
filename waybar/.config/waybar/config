@@ -8,14 +8,15 @@
   "custom/uptime",
   "cpu",
   "memory",
-  "mpd",
   "cffi/niri-taskbar"
   ],
 
   "modules-center": ["clock"],
 
   "modules-right": [
+    "mpd",
     "bluetooth",
+    "systemd-failed-units",
     "network",
     "pulseaudio", 
     "backlight",
@@ -97,6 +98,15 @@
     "tooltip": false,
     "format": "{:%H:%M:%S  -  %A, %d}",
     "interval": 1
+  },
+
+  "systemd-failed-units": {
+    "format": "  {nr_failed} failed",
+    "format-ok": " OK",
+    "system": true,
+    "user": true,
+    "hide-on-ok": true,
+    "on-click": "kitty -e sh -c 'systemctl --failed; systemctl --user --failed; read -p \"[Enter]\"'"
   },
 
   "network": {

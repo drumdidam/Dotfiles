@@ -83,6 +83,15 @@
 	color: #7b9ebd;
 }
 
+#systemd-failed-units {
+	color: #c67777;
+	padding: 0 10px;
+}
+
+#systemd-failed-units.ok {
+	color: #7da47a;
+}
+
 #network {
 	color: #7da47a;
 	padding: 0 10px;
