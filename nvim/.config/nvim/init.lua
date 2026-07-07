@@ -1,5 +1,4 @@
 --[[
-
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -69,7 +68,6 @@ Kickstart Guide:
   I have left several `:help X` comments throughout the init.lua
     These are hints about where to find more information about the relevant settings,
     plugins or Neovim features used in Kickstart.
-
    NOTE: Look for lines like this
 
     Throughout the file. These are for you, the reader, to help you understand what is happening.
@@ -93,8 +91,7 @@ vim.g.maplocalleader = ' '
 
 vim.env.PATH = vim.fn.system('echo $PATH'):gsub('\n', '')
 
--- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -110,12 +107,14 @@ vim.opt.relativenumber = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
+-- Use 24-bit (true) colors. Required so colorschemes render their real GUI
+-- background instead of falling back to the terminal's default background
+-- (which kitty draws transparently via background_opacity).
+vim.opt.termguicolors = true
+
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
@@ -127,7 +126,7 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.undofile = true
 
--- vim.o.shell = 'kitty'
+vim.o.shell = 'fish'
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -161,9 +160,6 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
--- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
--- instead raise a dialog asking if you wish to save the current file(s)
--- See `:help 'confirm'`
 vim.opt.confirm = true
 
 -- [[ Basic Keymaps ]]
@@ -191,8 +187,6 @@ vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
 --  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -231,16 +225,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
---    :Lazy update
---
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
@@ -803,6 +787,7 @@ require('lazy').setup({
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         html = { 'prettierd' },
         vue = { 'prettierd' },
+        java = { 'prettierd' },
       },
     },
   },
@@ -931,6 +916,26 @@ require('lazy').setup({
       vim.cmd.colorscheme 'token'
       vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'NONE' })
       vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = 'NONE' })
+
+      -- Make Neovim opaque while kitty stays transparent.
+      -- kitty draws any cell transparently (background_opacity) when it either
+      -- has no background at all, or its colour exactly equals kitty's
+      -- `background` (#262624). The token theme paints Normal with that exact
+      -- colour and leaves groups like EndOfBuffer/MsgArea without a background,
+      -- so Neovim inherits the terminal transparency. Repaint those one shade
+      -- off (#262623) -> visually identical but opaque; the shell is untouched.
+      local opaque = '#262623'
+      for name, def in pairs(vim.api.nvim_get_hl(0, {})) do
+        if def.bg == 0x262624 then
+          def.bg = opaque
+          vim.api.nvim_set_hl(0, name, def)
+        end
+      end
+      for _, group in ipairs { 'EndOfBuffer', 'MsgArea', 'WinSeparator' } do
+        local def = vim.api.nvim_get_hl(0, { name = group })
+        def.bg = opaque
+        vim.api.nvim_set_hl(0, group, def)
+      end
     end,
   },
 
@@ -1034,7 +1039,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
