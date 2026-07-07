@@ -1,0 +1,39 @@
+# Starship prompt — https://starship.rs/config/
+# Kein user@hostname bei lokalen Sessions (Standard). Zeigt Verzeichnis,
+# Git-Branch/Status und ein Prompt-Zeichen.
+
+# Kein Leerzeile vor dem Prompt
+add_newline = false
+
+# Reihenfolge / Aufbau des Prompts
+format = """
+$directory\
+$git_branch\
+$git_status\
+$cmd_duration\
+$character"""
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_status]
+style = "bold yellow"
+
+[cmd_duration]
+# Laufzeit anzeigen, wenn ein Befehl laenger als 2s gebraucht hat
+min_time = 2000
+style = "bold yellow"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vicmd_symbol = "[❮](bold green)"
+
+# Falls du user@hostname doch mal willst (z.B. nur bei SSH), gibt es die
+# Module [username] und [hostname] — standardmaessig aus bei lokalen Shells.
