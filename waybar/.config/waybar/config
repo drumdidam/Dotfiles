@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "position": "top",
+  "position": "bottom",
   "height": 34,
   "spacing": 0,
 
@@ -8,6 +8,7 @@
   "custom/uptime",
   "cpu",
   "memory",
+  "mpd",
   "cffi/niri-taskbar"
   ],
 
@@ -60,6 +61,25 @@
         },
     "on-click": "blueman-manager",
     "tooltip-format-connected":"{device_enumerate}"
+  },
+
+  "mpd": {
+    "format": "{stateIcon} {artist} - {title}",
+    "format-paused": "{stateIcon} {artist} - {title}",
+    "format-stopped": "  gestoppt",
+    "format-disconnected": "  MPD aus",
+    "state-icons": {
+      "playing": "",
+      "paused": ""
+    },
+    "interval": 2,
+    "max-length": 45,
+    "tooltip-format": "{title}\n{artist} — {album}\n{elapsedTime:%M:%S}/{totalTime:%M:%S}  ({songPosition}/{queueLength})",
+    "tooltip-format-disconnected": "MPD nicht erreichbar",
+    "on-click": "mpc toggle",
+    "on-click-right": "rmpc || ghostty -e rmpc",
+    "on-scroll-up": "mpc volume +5",
+    "on-scroll-down": "mpc volume -5"
   },
 
   "custom/music": {

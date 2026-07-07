@@ -51,6 +51,17 @@
 	padding: 0 10px;
 }
 
+#mpd {
+	color: #c9a96a;
+	padding: 0 10px;
+	margin-right: 16px;
+}
+
+#mpd.disconnected,
+#mpd.stopped {
+	color: #938e87;
+}
+
 /* --- Center --- */
 #clock {
 	color: #e8e4dc;
