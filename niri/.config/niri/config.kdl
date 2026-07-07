@@ -240,8 +240,8 @@ layout {
 
 spawn-at-startup "waybar"
 spawn-at-startup "Xwayland"
-spawn-at-startup "steam"
-spawn-at-startup "discord"
+// spawn-at-startup "steam"
+// spawn-at-startup "discord"
 spawn-at-startup "awww-daemon"
 spawn-sh-at-startup "swayidle -w"
 
@@ -327,8 +327,8 @@ binds {
     Mod+Shift+B { spawn "sh" "-c" "pkill yambar; yambar &"; }
     //Mod+E { spawn "dolphin";}
     Mod+E hotkey-overlay-title="Open Yazi" { spawn "kitty" "--working-directory" "-e" "yazi"; }
-    Mod+M { spawn-sh "brave-origin-nightly --new-window https://mistral.ai/chat";}
-    Mod+B { spawn-sh "brave-origin-nightly";}
+    Mod+M { spawn-sh "zen-browser --new-window https://mistral.ai/chat";}
+    Mod+B { spawn-sh "zen-browser";}
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
