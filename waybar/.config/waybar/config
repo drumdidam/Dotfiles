@@ -67,8 +67,8 @@
   "mpd": {
     "format": "{stateIcon} {artist} - {title}",
     "format-paused": "{stateIcon} {artist} - {title}",
-    "format-stopped": "  gestoppt",
-    "format-disconnected": "  MPD aus",
+    "format-stopped": " ",
+    "format-disconnected": "  MPD disconnected",
     "state-icons": {
       "playing": "",
       "paused": ""
