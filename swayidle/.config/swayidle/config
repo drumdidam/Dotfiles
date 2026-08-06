@@ -1,4 +1,7 @@
 # ~/.config/swayidle/config
-timeout 300 'hyprlock'
-timeout 500 'niri msg output DP-3 off' resume 'niri msg output DP-3 on'
-timeout 500 'niri msg output DP-2 off' resume 'niri msg output DP-2 on'
+# NOTE: swayidle runs with -w (wait for command). Any command that stays in the
+# foreground blocks the event loop, so hyprlock must be backgrounded or the
+# later timeouts below never fire.
+timeout 300 'pgrep -x hyprlock >/dev/null || hyprlock &'
+timeout 500 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors'
+before-sleep 'pgrep -x hyprlock >/dev/null || hyprlock'

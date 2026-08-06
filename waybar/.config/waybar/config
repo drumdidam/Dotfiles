@@ -18,7 +18,8 @@
     "bluetooth",
     "systemd-failed-units",
     "network",
-    "pulseaudio", 
+    "custom/headset",
+    "pulseaudio",
     "backlight",
     "battery",
   ],
@@ -153,6 +154,13 @@
       "default": ["", "", " "]
     },
     "on-click": "pavucontrol"
+  },
+
+  "custom/headset": {
+    "return-type": "json",
+    "interval": 30,
+    "exec": "$HOME/.config/waybar/headset-battery.sh",
+    "on-click": "$HOME/.config/waybar/headset-battery.sh"
   },
 
   "battery": {

@@ -1,5 +1,5 @@
 * {
-	font-family: 'Comic Code', monospace;
+	font-family: 'Comic Code', 'JetBrainsMono Nerd Font', monospace;
 	font-size: 16px;
 	min-height: 0;
 	padding: 0;
@@ -130,6 +130,34 @@
 
 #battery.critical:not(.charging) {
 	color: #c67777;
+}
+
+#custom-headset {
+	color: #7da47a;
+	padding: 0 10px;
+}
+
+@keyframes headset-charging-pulse {
+	from { color: #7da47a; }
+	to   { color: #d9b45a; }
+}
+
+#custom-headset.charging {
+	color: #d9b45a;
+	animation: headset-charging-pulse 1.2s ease-in-out infinite alternate;
+}
+
+#custom-headset.warning {
+	color: #c4956a;
+}
+
+#custom-headset.critical {
+	color: #c67777;
+}
+
+#custom-headset.disconnected,
+#custom-headset.unknown {
+	color: #938e87;
 }
 
 tooltip {
