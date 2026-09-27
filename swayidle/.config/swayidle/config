@@ -3,5 +3,5 @@
 # foreground blocks the event loop, so hyprlock must be backgrounded or the
 # later timeouts below never fire.
 timeout 300 'pgrep -x hyprlock >/dev/null || hyprlock &'
-timeout 500 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors'
+timeout 500 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors; (sleep 5; pkill -USR2 -x waybar) &'
 before-sleep 'pgrep -x hyprlock >/dev/null || hyprlock'

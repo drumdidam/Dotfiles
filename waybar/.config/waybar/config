@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "position": "bottom",
+  "position": "top",
   "height": 34,
   "spacing": 0,
 
@@ -40,7 +40,7 @@
 
   "cffi/niri-taskbar": {
     // module_path
-    "module_path": "/home/drumdidam/repos/nir-taskbar-fix-dir/niri-taskbar-ipcfix/target/release/libniri_taskbar.so",
+    "module_path": "/opt/niri-taskbar/libniri_taskbar.so",
     "apps": {
       "signal": [
         {

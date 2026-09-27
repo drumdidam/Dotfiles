@@ -89,8 +89,6 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.env.PATH = vim.fn.system('echo $PATH'):gsub('\n', '')
-
 vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
@@ -730,12 +728,15 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'jdtls', -- Java LSP, started by nvim-jdtls (lua/custom/plugins/java.lua)
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
+        -- nvim-jdtls starts jdtls itself; don't let mason-lspconfig enable it a second time
+        automatic_enable = { exclude = { 'jdtls' } },
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -1000,6 +1001,7 @@ require('lazy').setup({
         'vimdoc',
         'python',
         'javascript',
+        'java',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,

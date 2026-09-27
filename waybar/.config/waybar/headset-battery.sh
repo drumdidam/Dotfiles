@@ -1,0 +1,1 @@
+/home/drumdidam/repos/waybar-headset-battery/headset-battery.sh

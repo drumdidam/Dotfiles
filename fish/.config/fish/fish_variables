@@ -30,4 +30,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3d3a3a37
 SETUVAR fish_pager_color_selected_completion:e8e4dc
 SETUVAR fish_pager_color_selected_description:938e87
 SETUVAR fish_pager_color_selected_prefix:d97757\x20\x2d\x2dbold
-SETUVAR fish_user_paths:/home/drumdidam/\x2elocal/bin
+SETUVAR fish_user_paths:/home/drumdidam/\x2ecargo/bin\x1e/home/drumdidam/\x2elocal/bin
