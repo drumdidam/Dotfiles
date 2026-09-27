@@ -1,39 +1,225 @@
 # Starship prompt — https://starship.rs/config/
-# Kein user@hostname bei lokalen Sessions (Standard). Zeigt Verzeichnis,
-# Git-Branch/Status und ein Prompt-Zeichen.
+#
+# Zeile 1: Kontext (Host bei SSH, Container, Verzeichnis, Git, Toolchains, Cloud)
+# Zeile 2: Prompt-Zeichen
+#
+# Sprach-/Tool-Module erscheinen nur, wenn das aktuelle Verzeichnis passende
+# Dateien enthaelt (Cargo.toml, package.json, pom.xml, ...). Module fuer Tools,
+# die nicht installiert/konfiguriert sind, bleiben einfach unsichtbar.
 
 # Kein Leerzeile vor dem Prompt
 add_newline = false
 
-# Reihenfolge / Aufbau des Prompts
+# Versions-Abfragen (z.B. `java -version`) duerfen den Prompt nicht blockieren
+command_timeout = 1000
+
 format = """
+$username\
+$hostname\
+$container\
+$shlvl\
 $directory\
 $git_branch\
+$git_commit\
+$git_state\
 $git_status\
+$git_metrics\
+$package\
+$nodejs\
+$bun\
+$deno\
+$rust\
+$c\
+$cpp\
+$cmake\
+$java\
+$python\
+$direnv\
+$docker_context\
+$kubernetes\
+$helm\
+$terraform\
+$aws\
+$gcloud\
+$azure\
 $cmd_duration\
+$jobs\
+$status\
+$line_break\
 $character"""
+
+# ─── Kontext ────────────────────────────────────────────────────────────────
+
+# user@host nur bei SSH (oder als root) — wichtig, um nicht versehentlich
+# auf dem falschen Server Befehle abzusetzen
+[username]
+format = "[$user]($style)@"
+style_user = "bold green"
+style_root = "bold red"
+
+[hostname]
+ssh_only = true
+format = "[$hostname]($style) in "
+style = "bold red"
+
+# Zeigt an, wenn man in toolbox/distrobox/podman-Containern ist
+[container]
+format = "[$symbol $name]($style) "
+style = "bold dimmed red"
+
+# Verschachtelte Shells (z.B. nach `nix-shell`, `bash` in fish, ...)
+[shlvl]
+disabled = false
+threshold = 3  # tmux erhoeht SHLVL bereits auf 2
+symbol = "↕ "
+style = "dimmed yellow"
 
 [directory]
 truncation_length = 3
 truncate_to_repo = true
 style = "bold cyan"
+read_only = " 󰌾"
+
+# ─── Git ────────────────────────────────────────────────────────────────────
 
 [git_branch]
 symbol = " "
 style = "bold purple"
 
+# Commit-Hash bei detached HEAD (z.B. in CI-Checkouts oder beim Bisect)
+[git_commit]
+only_detached = true
+tag_disabled = false
+tag_symbol = "  "
+
+# Zeigt laufende Rebase/Merge/Cherry-Pick/Bisect-Vorgaenge
+[git_state]
+style = "bold red"
+
 [git_status]
 style = "bold yellow"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+
+# +/- Zeilen der aktuellen Aenderungen
+[git_metrics]
+disabled = false
+
+# ─── Sprachen / Toolchains ─────────────────────────────────────────────────
+
+# Version aus package.json / Cargo.toml / pom.xml des Projekts
+[package]
+symbol = "󰏗 "
+format = "[$symbol$version]($style) "
+
+[nodejs]
+symbol = " "
+format = "[$symbol($version )]($style)"
+
+[bun]
+format = "[$symbol($version )]($style)"
+
+[deno]
+format = "[$symbol($version )]($style)"
+
+[rust]
+symbol = " "
+format = "[$symbol($version )]($style)"
+
+# C nur bei .c-Dateien, damit C++-Projekte (mit .h) nicht doppelt angezeigt werden
+[c]
+symbol = " "
+detect_extensions = ["c"]
+format = "[$symbol($version(-$name) )]($style)"
+
+[cpp]
+disabled = false
+symbol = " "
+format = "[$symbol($version(-$name) )]($style)"
+
+[cmake]
+format = "[$symbol($version )]($style)"
+
+[java]
+symbol = " "
+format = "[$symbol($version )]($style)"
+
+# Zeigt aktives venv — verhindert pip install ins System-Python
+[python]
+symbol = " "
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[direnv]
+disabled = false
+format = "[$symbol$loaded]($style) "
+symbol = "direnv "
+
+# ─── DevOps / Cloud ─────────────────────────────────────────────────────────
+
+# Nur sichtbar, wenn nicht der Default-Context aktiv ist
+[docker_context]
+symbol = " "
+format = "[$symbol$context]($style) "
+
+# Immer sichtbar sobald eine kubeconfig existiert — man soll jederzeit sehen,
+# gegen welchen Cluster kubectl gerade laeuft. Prod-Contexts in Rot.
+[kubernetes]
+disabled = false
+symbol = "󱃾 "
+format = '[$symbol$context( \($namespace\))]($style) '
+style = "bold blue"
+contexts = [
+  { context_pattern = ".*prod.*", style = "bold red" },
+]
+
+[helm]
+format = "[$symbol($version )]($style)"
+
+[terraform]
+symbol = "󱁢 "
+format = "[$symbol$workspace]($style) "
+
+[aws]
+symbol = " "
+format = '[$symbol($profile )(\($region\) )]($style)'
+
+[gcloud]
+symbol = "󱇶 "
+format = '[$symbol$account(@$domain)(\($project\))]($style) '
+# Nur anzeigen, wenn explizit eine Config per Env gesetzt ist
+detect_env_vars = ["CLOUDSDK_CONFIG", "CLOUDSDK_ACTIVE_CONFIG_NAME"]
+
+[azure]
+disabled = false
+symbol = " "
+format = "[$symbol($subscription)]($style) "
+
+# ─── Status ─────────────────────────────────────────────────────────────────
 
 [cmd_duration]
 # Laufzeit anzeigen, wenn ein Befehl laenger als 2s gebraucht hat
 min_time = 2000
+format = "took [$duration]($style) "
 style = "bold yellow"
+
+# Hintergrund-Jobs (z.B. nach Ctrl+Z)
+[jobs]
+symbol = "✦"
+style = "bold blue"
+
+# Exit-Code des letzten Befehls inkl. Signal und Pipe-Status
+[status]
+disabled = false
+symbol = "✘ "
+format = "[$symbol$status( $signal_name)]($style) "
+pipestatus = true
+pipestatus_separator = "|"
+pipestatus_segment_format = "$status"
+pipestatus_format = '\[$pipestatus\] → [$symbol$status( $signal_name)]($style) '
+map_symbol = false
 
 [character]
 success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"
 vicmd_symbol = "[❮](bold green)"
-
-# Falls du user@hostname doch mal willst (z.B. nur bei SSH), gibt es die
-# Module [username] und [hostname] — standardmaessig aus bei lokalen Shells.
