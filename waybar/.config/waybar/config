@@ -1,4 +1,6 @@
+[
 {
+  "name": "top",
   "layer": "top",
   "position": "top",
   "height": 34,
@@ -8,7 +10,7 @@
   "custom/uptime",
   "cpu",
   "memory",
-  "cffi/niri-taskbar"
+  "niri/workspaces"
   ],
 
   "modules-center": ["clock"],
@@ -31,24 +33,11 @@
 },
 
   "niri/workspaces": {
-    "format": "{name}: {icon}",
+    "format": "{index}",
     "format-icons": {
       "active": "",
       "default": ""
     }
-  },
-
-  "cffi/niri-taskbar": {
-    // module_path
-    "module_path": "/opt/niri-taskbar/libniri_taskbar.so",
-    "apps": {
-      "signal": [
-        {
-          "match": "\\([0-9]+\\)$",
-          "class": "unread",
-        },
-      ],
-    },
   },
 
   "bluetooth": {
@@ -186,4 +175,30 @@
   "format" : ""
   },
 
+},
+
+// --- Dock unten: niri-taskbar ---
+{
+  "name": "dock",
+  "layer": "top",
+  "position": "bottom",
+  "height": 60,
+  "margin-bottom": 6,
+  "exclusive": true,
+
+  "modules-center": ["cffi/niri-taskbar"],
+
+  "cffi/niri-taskbar": {
+    // module_path
+    "module_path": "/home/drumdidam/repos/niri-taskbar/target/release/libniri_taskbar.so",
+    "apps": {
+      "signal": [
+        {
+          "match": "\\([0-9]+\\)$",
+          "class": "unread",
+        },
+      ],
+    },
+  }
 }
+]

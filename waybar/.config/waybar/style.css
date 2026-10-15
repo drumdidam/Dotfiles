@@ -168,3 +168,49 @@ tooltip {
 	padding: 4px 8px;
 	font-size: 12px;
 }
+
+/* --- Dock (unten) --- */
+window#waybar.dock {
+	background: transparent;
+}
+
+window#waybar.dock .modules-center {
+	background: #262624;
+	border: 1px solid #3a3a37;
+	border-radius: 12px;
+	padding: 2px 8px;
+}
+
+window#waybar.dock .niri-taskbar button {
+	padding: 2px 6px;
+	margin: 0 2px;
+	border-radius: 8px;
+	background: transparent;
+	border-bottom: 2px solid transparent;
+}
+
+window#waybar.dock .niri-taskbar button:hover {
+	background: #3a3a37;
+}
+
+window#waybar.dock .niri-taskbar button.focused {
+	border-bottom: 2px solid #7da47a;
+}
+
+window#waybar.dock .niri-taskbar button.unread {
+	border-bottom: 2px solid #c4956a;
+}
+
+/* Icons in voller Größe rendern, unfokussierte verkleinern → fokussiertes wirkt größer */
+window#waybar.dock .niri-taskbar button image {
+	-gtk-icon-transform: scale(0.72);
+	transition: -gtk-icon-transform 150ms ease-out;
+}
+
+window#waybar.dock .niri-taskbar button:hover image {
+	-gtk-icon-transform: scale(0.85);
+}
+
+window#waybar.dock .niri-taskbar button.focused image {
+	-gtk-icon-transform: scale(1);
+}
