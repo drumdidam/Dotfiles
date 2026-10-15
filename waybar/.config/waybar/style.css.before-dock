@@ -1,0 +1,170 @@
+* {
+	font-family: 'Comic Code', 'JetBrainsMono Nerd Font', monospace;
+	font-size: 16px;
+	min-height: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
+	border-radius: 0;
+}
+
+#waybar {
+	background: #262624;
+	color: #e8e4dc;
+}
+
+/* --- Left --- */
+#workspaces {
+	padding: 0 4px;
+}
+
+#workspaces button {
+	color: #938e87;
+	background: transparent;
+	padding: 0 8px;
+	border-bottom: 2px solid transparent;
+	transition: all 0.15s ease;
+}
+
+#workspaces button.active {
+	color: #7da47a;
+	border-bottom: 2px solid #7da47a;
+}
+
+#workspaces button:hover {
+	color: #e8e4dc;
+	background: #3a3a37;
+}
+
+#custom-uptime {
+	color: #938e87;
+	padding: 0 10px;
+}
+
+#cpu {
+	color: #7b9ebd;
+	padding: 0 10px;
+}
+
+#memory {
+	color: #a68bbf;
+	padding: 0 10px;
+}
+
+#mpd {
+	color: #c9a96a;
+	padding: 0 10px;
+	margin-right: 16px;
+}
+
+#mpd.disconnected,
+#mpd.stopped {
+	color: #938e87;
+}
+
+/* --- Center --- */
+#clock {
+	color: #e8e4dc;
+	padding: 0 12px;
+	font-weight: 500;
+}
+
+/* --- Right --- */
+#bluetooth {
+	color: #938e87;
+	padding: 0 10px;
+}
+
+#bluetooth.on {
+	color: #7b9ebd;
+}
+
+#bluetooth.connected {
+	color: #7b9ebd;
+}
+
+#systemd-failed-units {
+	color: #c67777;
+	padding: 0 10px;
+}
+
+#systemd-failed-units.ok {
+	color: #7da47a;
+}
+
+#network {
+	color: #7da47a;
+	padding: 0 10px;
+}
+
+#network.disconnected {
+	color: #c67777;
+}
+
+#pulseaudio {
+	color: #a68bbf;
+	padding: 0 10px;
+}
+
+#pulseaudio.muted {
+	color: #938e87;
+}
+
+#backlight {
+	color: #c4956a;
+	padding: 0 10px;
+}
+
+#battery {
+	color: #7da47a;
+	padding: 0 10px;
+}
+
+#battery.charging {
+	color: #7da47a;
+}
+
+#battery.warning:not(.charging) {
+	color: #c4956a;
+}
+
+#battery.critical:not(.charging) {
+	color: #c67777;
+}
+
+#custom-headset {
+	color: #7da47a;
+	padding: 0 10px;
+}
+
+@keyframes headset-charging-pulse {
+	from { color: #7da47a; }
+	to   { color: #d9b45a; }
+}
+
+#custom-headset.charging {
+	color: #d9b45a;
+	animation: headset-charging-pulse 1.2s ease-in-out infinite alternate;
+}
+
+#custom-headset.warning {
+	color: #c4956a;
+}
+
+#custom-headset.critical {
+	color: #c67777;
+}
+
+#custom-headset.disconnected,
+#custom-headset.unknown {
+	color: #938e87;
+}
+
+tooltip {
+	background: #3a3a37;
+	color: #e8e4dc;
+	border: 1px solid #585855;
+	border-radius: 4px;
+	padding: 4px 8px;
+	font-size: 12px;
+}

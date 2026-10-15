@@ -1,0 +1,53 @@
+# Font Configuration
+font_family      Comic Code
+bold_font        Comic Code Bold
+italic_font      Comic Code Italic
+bold_italic_font Comic Code Bold Italic
+font_size 18.0
+
+# Transparency
+background_opacity 0.9
+
+# include ./kitty-themes/themes/Chalkboard.conf
+
+# Additional useful shortcuts
+map ctrl+shift+c copy_to_clipboard
+map ctrl+shift+v paste_from_clipboard
+
+# Window settings
+window_padding_width 0
+confirm_os_window_close 0
+
+# Cursor
+cursor_shape block
+cursor_blink_interval 0
+
+# Tab bar
+tab_bar_edge bottom
+tab_bar_style powerline
+
+# Colors (optional - adjust to your preference)
+# Background and foreground
+# foreground #d8dee9
+# background #2e3440
+
+# URL handling
+# url_color #88c0d0
+# url_style curly
+
+# Performance
+repaint_delay 10
+input_delay 3
+sync_to_monitor yes
+
+# Shell
+shell fish
+
+
+include token.conf
+
+
+# BEGIN_KITTY_THEME
+# Tokyo Night
+include current-theme.conf
+# END_KITTY_THEME
